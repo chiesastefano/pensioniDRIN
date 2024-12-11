@@ -15,7 +15,7 @@ def pulisci_dati(colonna):
 #proposta1: rivaluto in base al reddito pensionistico
 #proposta 2: rivaluto in base al reddito pensionistico + cambiare la % di rivalutazione così come da schema
 #proposta 3: FL
-#Porposta 4: King Dati https://www.umbertobertonelli.it/nel-partito-che-vorrei/?doing_wp_cron=1733857743.5291359424591064453125#chapter-1
+#Porposta 4: King Dati (modificata)
 
 
 def rivalutazione(df, inflazione):
@@ -78,4 +78,14 @@ def rivalutazione_fl(df, inflazione):
     df_2.loc[df['Upper_bound'] <= 1576.14, 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 1.00 / 100)
     df_2.loc[(df['Upper_bound'] > 1576.14) & (df_2['Upper_bound'] <= 2101.52), 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.50 / 100)
     df_2.loc[df['Upper_bound'] > 2101.52, 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.00 / 100)
+    return df_2
+
+def rivalutazione_nl(df, inflazione):
+    df_2=df.copy()
+    df_2.loc[df['Upper_bound'] <= 1050.76, 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 1.00 / 100)
+    df_2.loc[(df['Upper_bound'] > 1050.76) & (df_2['Upper_bound'] <= 1576.14), 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.80 / 100)
+    df_2.loc[(df['Upper_bound'] > 1576.14) & (df_2['Upper_bound'] <= 2626.90), 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.60 / 100)
+    df_2.loc[(df['Upper_bound'] > 2626.90) & (df_2['Upper_bound'] <= 3152.28), 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.40 / 100)
+    df_2.loc[(df['Upper_bound'] > 3152.28) & (df_2['Upper_bound'] <= 4203.04), 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.20 / 100)
+    df_2.loc[df['Upper_bound'] > 4203.04, 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.00 / 100)
     return df_2
