@@ -73,3 +73,9 @@ def rivalutazione_umb(df, inflazione, crescita, mediana=0.80, min60mediana=1.00)
 
     return df
 
+def rivalutazione_fl(df, inflazione):
+    df_2=df.copy()
+    df_2.loc[df['Upper_bound'] <= 1576.14, 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 1.00 / 100)
+    df_2.loc[(df['Upper_bound'] > 1576.14) & (df_2['Upper_bound'] <= 2101.52), 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.50 / 100)
+    df_2.loc[df['Upper_bound'] > 2101.52, 'Importo rivalutato'] = df_2['Importo complessivo'] * (1 + inflazione * 0.00 / 100)
+    return df_2
