@@ -68,11 +68,11 @@ def rivalutazione_umb(df, inflazione, crescita, mediana=0.80, min60mediana=1.00)
             df['Importo complessivo'] * mediana * (1 + min(inflazione * 1.00, crescita) / 100) +
             df['Importo complessivo'] * (1 - mediana) * (1 + min(inflazione * 1.00, crescita) / 100)
         )
-        df.loc[(df['Upper_bound'] > 2101.52) & (df['Upper_bound'] <= 2626.90), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.85, crescita))
-        df.loc[(df['Upper_bound'] > 2626.90) & (df['Upper_bound'] <= 3152.28), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.53, crescita))
-        df.loc[(df['Upper_bound'] > 3152.28) & (df['Upper_bound'] <= 4203.04), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.47, crescita))
-        df.loc[(df['Upper_bound'] > 4203.04) & (df['Upper_bound'] <= 5253.80), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.37, crescita))
-        df.loc[df['Upper_bound'] > 5253.80, 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.32, crescita))
+        df.loc[(df['Upper_bound'] > 2101.52) & (df['Upper_bound'] <= 2626.90), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.85, crescita) / 100)
+        df.loc[(df['Upper_bound'] > 2626.90) & (df['Upper_bound'] <= 3152.28), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.53, crescita) / 100)
+        df.loc[(df['Upper_bound'] > 3152.28) & (df['Upper_bound'] <= 4203.04), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.47, crescita) / 100)
+        df.loc[(df['Upper_bound'] > 4203.04) & (df['Upper_bound'] <= 5253.80), 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.37, crescita) / 100)
+        df.loc[df['Upper_bound'] > 5253.80, 'Importo rivalutato'] = df['Importo complessivo'] * (1 + min(inflazione * 0.32, crescita) / 100)
 
     return df
 
